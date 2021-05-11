@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row">
+        <form  [formGroup]="userForm" (ngSubmit)="onSubmit()"> 
+            <div class="form-group">
+              <label for="users">Users</label>
+              <input type="text" class="form-control" name="name" formControlName="name" id="name" placeholder="Enter Name">
+              <small *ngIf="(fval.name.dirty || fval.name.touched) && fval.name.errors" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">select role</label>
+                <select class="form-control" id="exampleFormControlSelect1" formControlName="org">
+                    <option selected="selected" value="">Select</option>
+                  <option *ngFor="let role of roleList" [value]="role.name">{{role.name}}</option>
+                  
+                </select>
+              </div>
+        
+            <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Submit</button>
+          </form>
+    
+    
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Descrption</th>
+                <th scope="col">Org</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let org of userList;let i=index">
+                <th scope="row">{{org.name}}</th>
+                <td>{{org.org}}</td>
+                <td>{{getOrg(org.org)}}</td>
+                <td><button type="button" class="btn btn-primary" (click)="editOrgan(i)">Edit</button>
+                    <button type="button" class="btn btn-secondary" (click)="deleteOrgan(i)">Delete</button></td>
+              </tr>
+    
+            </tbody>
+          </table>
+    </div>
+    </div>

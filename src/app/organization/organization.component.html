@@ -1,0 +1,37 @@
+<div class="container">
+<div class="row">
+    <form  [formGroup]="organizationForm" (ngSubmit)="onSubmit()"> 
+        <div class="form-group">
+          <label for="exampleInputEmail1">Name </label>
+          <input type="text" class="form-control" name="name" formControlName="name" id="name" placeholder="Enter Name">
+          <small *ngIf="(fval.name.dirty || fval.name.touched) && fval.name.errors" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+          <label for="descrption">Descrption</label>
+          <input type="text" class="form-control" name="descrption" formControlName="desc" id="descrption" placeholder="Descrption">
+          <small *ngIf="(fval.desc.dirty || fval.desc.touched) && fval.desc.errors" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="this.organizationForm.invalid">Submit</button>
+      </form>
+
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Descrption</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let org of organizationList;let i=index">
+            <th scope="row">{{org.name}}</th>
+            <td>{{org.desc}}</td>
+            <td><button type="button" class="btn btn-primary" (click)="editOrgan(i)">Edit</button>
+                <button type="button" class="btn btn-secondary" (click)="deleteOrgan(i)">Delete</button></td>
+          </tr>
+
+        </tbody>
+      </table>
+</div>
+</div>
